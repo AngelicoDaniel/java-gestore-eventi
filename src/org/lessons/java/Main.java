@@ -1,28 +1,28 @@
 package org.lessons.java;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Evento concerto = new Evento("Concerto Live", LocalDate.of(2023, 9, 15), 100);
 
-            Date dataEvento = formatter.parse("23/06/2023");
-            Evento concerto = new Evento("Concerto", dataEvento, 100);
+            System.out.println(concerto);
 
             concerto.prenota();
-            concerto.prenota();
-            System.out.println("Posti prenotati: " + concerto.getPostiPrenotati());
+            System.out.println(concerto.getPostiPrenotati());
+
             concerto.disdici();
-            System.out.println("Posti prenotati" + concerto.getPostiPrenotati());
+            System.out.println(concerto.getPostiPrenotati());
 
-            System.out.println(concerto.toString());
-        }catch (ParseException e){
-            System.out.println("Errore nella formattazione della data");
-        }catch (IllegalArgumentException | IllegalStateException e){
-            System.out.println("Errore: " + e.getMessage());
+            try {
+                concerto.setData(LocalDate.of(2023, 6, 13));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
